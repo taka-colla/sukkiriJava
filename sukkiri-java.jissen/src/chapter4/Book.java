@@ -28,7 +28,7 @@ public class Book implements Comparable<Book>,Cloneable{
 		if(!this.title.equals(book.title)){
 			return false;
 		}
-		if(!this.publishDate.equlas(book.publishDate)) {
+		if(!this.publishDate.equals(book.publishDate)) {
 			return false;
 		}
 		return true;
