@@ -1,18 +1,20 @@
 package chapter3;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 		public static void main(String[] args) {
 	Hero saito = new Hero("斎藤");
 	Hero suzuki = new Hero("鈴木");
-	List<Hero> heroList = new ArrayList<Hero>();
-	heroList.add(saito);
-	heroList.add(suzuki);
 
-	for(int i = 0; i<heroList.size();i ++) {
-		System.out.println(heroList.get(i).getName());
+	Map<Hero,Integer> heroAndKill = new HashMap<>();
+	heroAndKill.put(saito,3);
+	heroAndKill.put(suzuki, 7);
+
+	for(Hero key : heroAndKill.keySet()) {
+		int value = heroAndKill.get(key);
+		System.out.println(key.getName()+"が倒した敵＝"+value);
 	}
 
 
