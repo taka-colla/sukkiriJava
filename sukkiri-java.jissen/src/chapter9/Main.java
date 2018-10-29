@@ -1,23 +1,21 @@
 package chapter9;
 
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Main {
-	public static void main(String[] args) {
-		FileWriter fw = null; //tryブロックの外で宣言しnullで初期化しないと、finallyブロック内でclose()を呼べない
-		try {
-			fw = new FileWriter("rpgsave.dat",true);
-			fw.write('A');
-			fw.flush();
-		}catch(IOException e) {
-			System.out.println("ファイル書き込みエラーです");
-		}finally { //ファイルを閉じるためのfinallyブロック
-			if(fw != null) {
-				try { //close()がIOExceptionを送出する可能性があるため、再度try-catchが必要。ただし失敗しても何もできないためcatchブロック内は空
-					fw.close();
-				}catch(IOException e2) {}
-			}
+	public static void main(String[] args) throws IOException {
+		FileInputStream fis = new FileInputStream(args[0]);
+		FileOutputStream fos = new FileOutputStream(args[1],true);
+		int i = fis.read();
+		while(i != -1) {
+			fos.write(i);
+			i = fis.read();
 		}
+		fos.flush();
+		fos.close();
+		fis.close();
+
 	}
 }
