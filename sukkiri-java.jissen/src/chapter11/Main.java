@@ -1,20 +1,23 @@
 package chapter11;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.URL;
 
 public class Main {
 	public static void main(String[] args) throws IOException{
-		URL url = new URL("http://dokojava.jp");
+		URL url = new URL("http://dokojava.jp/favicon.ico");
 		InputStream is = url.openStream();
-		InputStreamReader isr = new InputStreamReader(is);
-		int i = isr.read();
+		OutputStream os = new FileOutputStream("dj.ico");;
+		int i = is.read();
 		while(i != -1) {
-			System.out.print((char)i);
-			i = isr.read();
+			os.write((byte)i);
+			i = is.read();
 		}
-		isr.close();
+		is.close();
+		os.flush();
+		os.close();
 	}
 }
